@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Shiba | SS</title>
+  <meta name="description" content="Super Shiba — SS token en Solana." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#100a12; --bg2:#1a1020; --card:rgba(255,255,255,0.04); --text:#fef7ff; --muted:#d4bfdb;
+      --pink:#ff5fcf; --orange:#ffb347; --yellow:#ffe06a; --line:rgba(255,255,255,0.08); --green:#87f5b4;
+    }
+
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      margin:0; font-family:"Inter",sans-serif; color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255,95,207,0.28), transparent 22%),
+        radial-gradient(circle at top right, rgba(255,179,71,0.18), transparent 24%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      line-height:1.6;
+    }
+
+    a{text-decoration:none;color:inherit;}
+    img{max-width:100%;display:block;}
+    .container{width:min(1180px, calc(100% - 32px)); margin:0 auto;}
+
+    header{
+      position:sticky; top:0; z-index:30;
+      background:rgba(16,10,18,0.7); backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav{
+      min-height:74px; display:flex; align-items:center; justify-content:space-between; gap:18px;
+    }
+
+    .brand{display:inline-flex; align-items:center; gap:12px; font-weight:900; text-transform:uppercase; letter-spacing:0.05em;}
+    .logo{
+      width:42px; height:42px; border-radius:14px; display:grid; place-items:center;
+      background:linear-gradient(135deg, var(--pink), var(--orange));
+      color:#160d15; font-weight:900; box-shadow:0 12px 26px rgba(255,95,207,0.3);
+    }
+
+    .nav-links{display:flex; gap:22px; color:var(--muted);}
+    .nav-links a:hover{color:var(--text);}
+    .nav-actions{display:flex; gap:12px; flex-wrap:wrap;}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      border:1px solid transparent; border-radius:999px; padding:12px 18px; font-weight:700;
+      cursor:pointer; transition:transform 0.2s ease;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px);}
+    .btn-primary{
+      background:linear-gradient(135deg, var(--pink), var(--orange)); color:#160d15;
+      box-shadow:0 18px 36px rgba(255,95,207,0.28);
+    }
+    .btn-secondary{
+      background:rgba(255,255,255,0.02); color:var(--text); border-color:var(--line);
+    }
+    .btn-disabled{
+      opacity:0.45; pointer-events:none;
+    }
+
+    .hero{padding:56px 0 30px;}
+    .hero-grid{
+      display:grid; grid-template-columns:1.1fr 0.9fr; gap:38px; align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:10px; padding:8px 14px;
+      border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,0.02);
+      font-size:0.76rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--yellow); font-weight:800;
+    }
+    .eyebrow::before{content:"◆"; font-size:0.7rem;}
+
+    h1{
+      font-size:clamp(2.7rem, 5vw, 5.6rem); line-height:0.95; letter-spacing:-0.06em;
+      margin:18px 0 12px;
+    }
+
+    .gradient{
+      background:linear-gradient(135deg, var(--yellow), var(--orange), var(--pink)); -webkit-background-clip:text; color:transparent;
+    }
+
+    .lead{color:var(--muted); font-size:1.08rem; max-width:650px;}
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:22px;}
+    .stats{display:flex; gap:16px; flex-wrap:wrap; margin-top:28px;}
+    .stat-box{
+      min-width:140px; padding:16px 18px; border:1px solid var(--line); border-radius:18px;
+      background:rgba(255,255,255,0.03);
+    }
+    .stat-box strong{display:block; font-size:1.35rem;}
+    .stat-box span{color:var(--muted); font-size:0.8rem;}
+
+    .hero-visual{position:relative; min-height:500px; display:grid; place-items:center;}
+    .orb{
+      position:absolute; right:14%; top:14%; width:120px; height:120px; border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, #fff8db, var(--orange) 28%, rgba(255,95,207,0.85) 82%);
+      filter:blur(12px); opacity:0.95; animation:float 6s ease-in-out infinite;
+    }
+    @keyframes float{
+      0%,100%{transform:translateY(0px);}
+      50%{transform:translateY(-12px);}
+    }
+
+    .card-visual{
+      position:relative; width:min(100%, 500px); aspect-ratio:1.06;
+      border-radius:36px; background:rgba(255,255,255,0.04); border:1px solid var(--line);
+      box-shadow:0 25px 60px rgba(255,95,207,0.18); overflow:hidden; padding:22px;
+    }
+    .dog-shell{
+      width:100%; height:100%; border-radius:28px; display:grid; place-items:center;
+      background:linear-gradient(180deg, rgba(255,124,173,0.12), rgba(255,255,255,0.02)), rgba(12,8,16,0.45);
+      border:1px solid var(--line);
+    }
+    .shiba{
+      position:relative; width:230px; height:230px;
+      background:linear-gradient(180deg, #f9d37a, #f5b055);
+      border-radius:46% 46% 42% 42% / 38% 38% 56% 56%;
+      box-shadow:inset -12px -12px 0 rgba(144,84,16,0.18), 0 20px 40px rgba(0,0,0,0.25);
+    }
+    .shiba::before, .shiba::after{
+      content:""; position:absolute; width:52px; height:52px; background:#f9d37a; border-radius:50%; top:-18px;
+      box-shadow:inset 0 -6px 0 rgba(144,84,16,0.12);
+    }
+    .shiba::before{left:38px;} .shiba::after{right:38px;}
+    .ear{
+      position:absolute; width:46px; height:60px; background:#d88930; top:-34px; border-radius:45% 45% 50% 50%;
+      z-index:-1;
+    }
+    .ear.left{left:28px; transform:rotate(-22deg);} .ear.right{right:28px; transform:rotate(22deg);}
+    .eye{
+      position:absolute; width:18px; height:22px; background:#1b0b12; border-radius:50%;
+      top:96px; box-shadow:inset 0 0 0 4px rgba(255,255,255,0.08);
+    }
+    .eye.left{left:62px;} .eye.right{right:62px;}
+    .snout{
+      position:absolute; width:86px; height:66px; background:#f7f1ef; left:50%; transform:translateX(-50%);
+      bottom:36px; border-radius:48% 48% 56% 56%; box-shadow:inset 0 -6px 0 rgba(0,0,0,0.03);
+    }
+    .nose{
+      position:absolute; width:22px; height:16px; background:#111; border-radius:50%; left:50%;
+      transform:translateX(-50%); bottom:50px;
+    }
+    .smile{
+      position:absolute; width:36px; height:18px; border-bottom:4px solid #111; border-radius:0 0 22px 22px;
+      left:50%; transform:translateX(-50%); bottom:26px;
+    }
+    .badge{
+      position:absolute; right:18px; bottom:18px; z-index:2; border-radius:18px;
+      background:rgba(17,14,20,0.75); border:1px solid var(--line);
+      padding:12px 14px; backdrop-filter:blur(10px);
+    }
+    .badge .tiny{color:var(--muted); font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase;}
+    .badge strong{display:block; font-size:1.3rem; margin-top:2px;}
+
+    .section{padding:52px 0;}
+    .section-header{
+      display:flex; justify-content:space-between; align-items:end; gap:20px; flex-wrap:wrap; margin-bottom:22px;
+    }
+    h2{
+      margin:0; font-size:clamp(2rem, 4vw, 3rem); letter-spacing:-0.05em;
+    }
+    .section-header p{margin:0; color:var(--muted); max-width:580px;}
+    .cards{
+      display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px;
+    }
+    .card{
+      background:var(--card); border:1px solid var(--line); border-radius:24px; padding:24px 22px;
+    }
+    .icon{
+      width:54px; height:54px; display:grid; place-items:center; border-radius:16px;
+      font-size:1.3rem; background:linear-gradient(135deg, rgba(255,95,207,0.18), rgba(255,179,71,0.18));
+      border:1px solid var(--line);
+    }
+    .card h3{margin:12px 0 8px; font-size:1.18rem;}
+    .card p{margin:0; color:var(--muted);}
+
+    .tokenomics{
+      display:grid; grid-template-columns:1.2fr 0.8fr; gap:20px;
+    }
+    .token-box{
+      background:var(--card); border:1px solid var(--line); border-radius:24px; padding:24px 22px;
+    }
+    .distribution{
+      display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:18px;
+    }
+    .distribution-item{
+      background:rgba(255,255,255,0.025); border:1px solid var(--line); border-radius:18px; padding:16px 18px;
+    }
+    .distribution-item .label{
+      color:var(--muted); font-size:0.74rem; text-transform:uppercase; letter-spacing:0.1em;
+    }
+    .distribution-item strong{display:block; font-size:1.4rem; margin-top:8px;}
+    .token-list{
+      list-style:none; padding:0; margin:20px 0 0; display:grid; gap:12px;
+    }
+    .token-list li{
+      display:flex; justify-content:space-between; align-items:center; gap:12px;
+      background:rgba(255,255,255,0.02); border:1px solid var(--line); border-radius:14px; padding:12px 14px; color:var(--muted);
+    }
+    .token-list span:last-child{color:var(--text); font-weight:700;}
+
+    .buy-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px;}
+    .steps{display:grid; gap:12px; margin-top:16px;}
+    .step{display:flex; gap:12px; align-items:flex-start; color:var(--muted);}
+    .step b{
+      display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%;
+      background:linear-gradient(135deg, var(--pink), var(--orange)); color:#110b14; font-size:0.8rem; flex-shrink:0;
+    }
+    .wallet-box{
+      margin-top:18px; padding:16px; background:rgba(255,255,255,0.03); border:1px solid var(--line); border-radius:18px;
+    }
+    .address{
+      word-break:break-all; font-weight:600; color:var(--text);
+      background:rgba(255,255,255,0.02); border:1px solid var(--line); border-radius:12px; padding:10px 12px;
+    }
+    .wallet-status{
+      margin-top:12px; color:var(--green); font-weight:700; word-break:break-all;
+    }
+
+    .mini-cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px;}
+    .roadmap{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px;}
+    .phase{
+      background:rgba(255,255,255,0.03); border:1px solid var(--line); border-radius:20px; padding:22px 18px;
+    }
+    .phase .num{
+      font-size:0.72rem; font-weight:800; letter-spacing:0.12em; color:var(--yellow); text-transform:uppercase;
+    }
+    .phase h3{margin:10px 0 8px; font-size:1.08rem;}
+    .phase p{margin:0; color:var(--muted);}
+    .socials{display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;}
+    .social{
+      display:inline-flex; padding:10px 14px; border:1px solid var(--line); border-radius:999px;
+      background:rgba(255,255,255,0.02); font-weight:600;
+    }
+
+    .countdown-wrap{
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 28px 22px;
+      text-align: center;
+      margin-bottom: 28px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.02), 0 25px 60px rgba(255,95,207,0.14);
+    }
+
+    .countdown-header{
+      margin-bottom: 18px;
+    }
+
+    .countdown{
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .time-box{
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px 12px;
+      position: relative;
+      overflow: hidden;
+      transform: translateY(0);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: countdownPulse 1.6s ease-in-out infinite;
+    }
+
+    .time-box:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(255,95,207,0.18);
+    }
+
+    .time-box::before{
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,95,207,0.12), rgba(255,179,71,0.08), transparent);
+      pointer-events: none;
+    }
+
+    .time-box span{
+      display:block;
+      position: relative;
+      z-index: 1;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--yellow), var(--orange), var(--pink));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .time-box small{
+      position: relative;
+      z-index: 1;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+    }
+
+    @keyframes countdownPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    footer{padding:30px 0 60px; border-top:1px solid var(--line); text-align:center; color:var(--muted);}
+
+    @media (max-width:980px){
+      .hero-grid,.tokenomics,.buy-grid,.cards,.roadmap{grid-template-columns:1fr;}
+      .nav-links{display:none;}
+    }
+
+    @media (max-width:640px){
+      .cta-row,.mini-cta,.nav-actions{flex-direction:column;}
+      .btn{width:100%;}
+      .shiba{transform:scale(0.9);}
+      .countdown{grid-template-columns: repeat(2, minmax(0, 1fr));}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <span class="logo">SS</span>
+        <span>Super Shiba</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#buy">Buy</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#community">Community</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#buy" class="btn btn-secondary">Buy SS</a>
+        <a href="https://x.com/SUPER_SHIBA1" target="_blank" rel="noreferrer" class="btn btn-primary">Follow X</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Solana memecoin</span>
+          <h1>Super <span class="gradient">Shiba</span> — SS</h1>
+          <p class="lead">
+            SS is a community-first Solana memecoin. Built for speed, hype and a fearless pack mentality.
+            The token isn't live yet, but the web is ready for the official launch.
+          </p>
+
+          <div class="cta-row">
+            <a href="#buy" class="btn btn-primary" id="buy-now">Buy SS</a>
+            <a href="#tokenomics" class="btn btn-secondary">Tokenomics</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat-box"><strong>Solana</strong><span>Network</span></div>
+            <div class="stat-box"><strong>SS</strong><span>Token</span></div>
+            <div class="stat-box"><strong>1B</strong><span>Supply idea</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="orb"></div>
+          <div class="card-visual">
+            <div class="dog-shell">
+              <div class="shiba">
+                <div class="ear left"></div>
+                <div class="ear right"></div>
+                <span class="eye left"></span>
+                <span class="eye right"></span>
+                <span class="snout"></span>
+                <span class="nose"></span>
+                <span class="smile"></span>
+              </div>
+            </div>
+            <div class="badge">
+              <div class="tiny">Wallet</div>
+              <strong>Phantom</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="countdown-section">
+      <div class="container">
+        <div class="countdown-wrap">
+          <div class="countdown-header">
+            <span class="eyebrow">Launch countdown</span>
+            <h2>SS llega pronto</h2>
+          </div>
+
+          <div class="countdown" id="countdown">
+            <div class="time-box">
+              <span id="days">00</span>
+              <small>Días</small>
+            </div>
+            <div class="time-box">
+              <span id="hours">00</span>
+              <small>Horas</small>
+            </div>
+            <div class="time-box">
+              <span id="minutes">00</span>
+              <small>Minutos</small>
+            </div>
+            <div class="time-box">
+              <span id="seconds">00</span>
+              <small>Segundos</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <h2>Why Super Shiba?</h2>
+          <p>We combine meme energy, a clear identity and community-first positioning.</p>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <div class="icon">🔥</div>
+            <h3>High energy</h3>
+            <p>Built around hype, momentum and community power.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">🐕</div>
+            <h3>Brand identity</h3>
+            <p>Strong visuals and memorable meme culture.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">🚀</div>
+            <h3>Launch ready</h3>
+            <p>Prepared for mint, social growth and public launch.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tokenomics">
+      <div class="container">
+        <div class="section-header">
+          <h2>Tokenomics</h2>
+          <p>Simple structure for community, liquidity and growth.</p>
+        </div>
+
+        <div class="tokenomics">
+          <div class="token-box">
+            <h3 style="margin:0 0 8px; font-size:1.5rem;">SS</h3>
+            <p style="margin:0; color:var(--muted);">Supply example: 1,000,000,000 SS</p>
+
+            <div class="distribution">
+              <div class="distribution-item"><div class="label">Liquidity</div><strong>40%</strong></div>
+              <div class="distribution-item"><div class="label">Community</div><strong>30%</strong></div>
+              <div class="distribution-item"><div class="label">Marketing</div><strong>15%</strong></div>
+              <div class="distribution-item"><div class="label">Team</div><strong>15%</strong></div>
+            </div>
+
+            <ul class="token-list">
+              <li><span>Official launch</span><span>Pending</span></li>
+              <li><span>DEX</span><span>Jupiter / Raydium</span></li>
+              <li><span>Mint</span><span>To be published</span></li>
+            </ul>
+          </div>
+
+          <div class="token-box">
+            <h3 style="margin:0 0 14px;">Mint status</h3>
+            <div id="mint-address" class="address">No publicado — aún no hay mint</div>
+
+            <div class="mini-cta">
+              <a id="explorer-link" href="#" class="btn btn-secondary btn-disabled" target="_blank" rel="noreferrer">Explorer</a>
+              <a id="dex-link" href="#" class="btn btn-secondary btn-disabled" target="_blank" rel="noreferrer">Jupiter</a>
+            </div>
+
+            <div class="wallet-box">
+              <div style="font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted);">Wallet</div>
+              <button id="connect-wallet" class="btn btn-primary" style="margin-top:12px; width:100%;">Conectar Phantom</button>
+              <button id="disconnect-wallet" class="btn btn-secondary" style="margin-top:10px; width:100%;">Desconectar</button>
+              <div id="wallet-status" class="wallet-status">Wallet: no conectada</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="buy">
+      <div class="container">
+        <div class="section-header">
+          <h2>Buy SS</h2>
+          <p>Compra con Phantom en Solana cuando el mint sea oficial.</p>
+        </div>
+
+        <div class="buy-grid">
+          <div class="token-box">
+            <h3 style="margin:0;">Cómo comprar</h3>
+            <div class="steps">
+              <div class="step"><b>1</b><span>Conecta tu wallet Phantom.</span></div>
+              <div class="step"><b>2</b><span>Asegúrate de tener SOL para fees.</span></div>
+          
